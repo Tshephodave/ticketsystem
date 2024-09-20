@@ -8,7 +8,7 @@ const Notifications = () => {
     const fetchNotifications = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:4000/ticket/notifications', {
+        const response = await axios.get('https://ticketsystem-backend-cbpv.onrender.com/ticket/notifications', {
           headers: {
             'Authorization': `Bearer ${token}`
           }

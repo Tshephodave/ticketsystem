@@ -5,7 +5,7 @@ import { FileTextOutlined, CheckCircleOutlined, ExclamationCircleOutlined, Close
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
-const API_URL = 'http://localhost:4000';
+const API_URL = 'https://ticketsystem-backend-cbpv.onrender.com';
 const { Header, Content } = Layout;
 
 const Dashboard = () => {

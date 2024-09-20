@@ -28,7 +28,7 @@ const MainLayout = ({ user, setUser }) => {
     const fetchNotificationCount = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get('http://localhost:4000/ticket/notifications', {
+        const response = await axios.get('https://ticketsystem-backend-cbpv.onrender.com/ticket/notifications', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -65,7 +65,7 @@ const MainLayout = ({ user, setUser }) => {
       if (token) {
         try {
           const { userId } = jwtDecode(token);
-          const response = await axios.get(`http://localhost:4000/user/${userId}`, {
+          const response = await axios.get(`https://ticketsystem-backend-cbpv.onrender.com/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

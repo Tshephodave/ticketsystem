@@ -13,7 +13,7 @@ export default function Tickets() {
       const token = localStorage.getItem('token');
       if (token) {
         try {
-          const response = await axios.get('http://localhost:4000/ticket/all', {
+          const response = await axios.get('https://ticketsystem-backend-cbpv.onrender.com/ticket/all', {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -35,7 +35,7 @@ export default function Tickets() {
       if (token) {
         try {
           const { userId } = jwtDecode(token);
-          const response = await axios.get(`http://localhost:4000/user/${userId}`, {
+          const response = await axios.get(`https://ticketsystem-backend-cbpv.onrender.com/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

@@ -18,7 +18,7 @@ const RespondToTicket = () => {
           return;
         }
 
-        const response = await axios.get('http://localhost:4000/ticket/all', {
+        const response = await axios.get('https://ticketsystem-backend-cbpv.onrender.com/ticket/all', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -59,7 +59,7 @@ const RespondToTicket = () => {
 
     try {
       await axios.patch(
-        `http://localhost:4000/ticket/respond/${selectedTicketId}`,
+        `https://ticketsystem-backend-cbpv.onrender.com/ticket/respond/${selectedTicketId}`,
         { message, status },
         {
           headers: { Authorization: `Bearer ${token}` },

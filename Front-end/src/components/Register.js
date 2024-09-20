@@ -129,7 +129,7 @@ const Register = () => {
       return;
     }
     try {
-      const response = await axios.post('http://localhost:4000/user/register', formData);
+      const response = await axios.post('https://ticketsystem-backend-cbpv.onrender.com/user/register', formData);
       alert(response.data.message);
       navigate('/login');
     } catch (error) {
