@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button, Layout,Menu } from 'antd';
+import { Button, Layout, Menu } from 'antd';
 import { motion } from 'framer-motion';
-import Typical from 'react-typical';
+import {Typed} from 'react-typed'; 
 import logo from './Vivlia-Logo.png';
-const{Header,Content}=Layout;
-const Home = () => {
 
+const { Header, Content } = Layout;
+
+const Home = () => {
   return (
     <Layout>
       <Header>
@@ -14,35 +15,43 @@ const Home = () => {
         </Menu>
       </Header>
       <Content style={{ padding: '50px' }}>
-    <div className="app-container">
-      <img src={logo} alt="Logo" className="app-logo" />
+        <div className="app-container">
+          <img src={logo} alt="Logo" className="app-logo" />
 
-      <motion.h1
-        className="app-title"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: 'easeInOut', delay: 0.1 }}
-        style={{ textAlign: 'center' }}
-      >
-        <Typical
-          loop={Infinity}
-          steps={['Ticket', 1000, ' Management', 1000,  'System', 1000]}
-        />
-      </motion.h1>
+          <motion.h1
+            className="app-title"
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: 'easeInOut', delay: 0.1 }}
+            style={{ textAlign: 'center' }}
+          >
+            {/* Replaced Typical with Typed */}
+            <Typed
+              strings={['Ticket', ' Management', ' System']}
+              typeSpeed={100}
+              backSpeed={50}
+              loop
+            />
+          </motion.h1>
 
-      <motion.p
-        className="app-description"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
-        style={{ textAlign: 'center', margin: '20px auto', fontSize: '20px', color: '#4a4a4a', maxWidth: '600px', lineHeight: '1.6' }}
-      >
-        Welcome to  <strong>Tickets Management System</strong>
-      </motion.p>
-
-      
-    </div>
-    </Content>
+          <motion.p
+            className="app-description"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, ease: 'easeInOut', delay: 0.3 }}
+            style={{
+              textAlign: 'center',
+              margin: '20px auto',
+              fontSize: '20px',
+              color: '#4a4a4a',
+              maxWidth: '600px',
+              lineHeight: '1.6',
+            }}
+          >
+            Welcome to <strong>Tickets Management System</strong>
+          </motion.p>
+        </div>
+      </Content>
     </Layout>
   );
 };
