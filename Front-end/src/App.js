@@ -29,7 +29,7 @@ const App = () => {
       if (token) {
         try {
           const { userId } = jwtDecode(token);
-          const response = await axios.get(`http://localhost:4000/user/${userId}`, {
+          const response = await axios.get(`https://ticketsystem-backend-cbpv.onrender.com/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },

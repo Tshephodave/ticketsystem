@@ -1,8 +1,7 @@
 import React from 'react';
-import { Button, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import { motion } from 'framer-motion';
-import {Typed} from 'react-typed'; 
-import logo from './Vivlia-Logo.png';
+import logo from './Vivlia-Logo.png';  
 
 const { Header, Content } = Layout;
 
@@ -25,13 +24,8 @@ const Home = () => {
             transition={{ duration: 1, ease: 'easeInOut', delay: 0.1 }}
             style={{ textAlign: 'center' }}
           >
-            {/* Replaced Typical with Typed */}
-            <Typed
-              strings={['Ticket', ' Management', ' System']}
-              typeSpeed={100}
-              backSpeed={50}
-              loop
-            />
+            
+            Ticket Management System
           </motion.h1>
 
           <motion.p

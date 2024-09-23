@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card, Layout, List, Button, notification, Spin } from 'antd';
-import { FileTextOutlined, CheckCircleOutlined, ExclamationCircleOutlined, CloseCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { FileTextOutlined, CheckCircleOutlined, ExclamationCircleOutlined,  PlusOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from 'jwt-decode';
 
