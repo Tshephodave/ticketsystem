@@ -2,10 +2,12 @@ import React from 'react';
 import { Layout, Menu, Button } from 'antd';
 import { motion } from 'framer-motion';
 import logo from './Vivlia-Logo.png';
+import { useNavigate } from 'react-router-dom';
 
 const { Header, Content } = Layout;
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Layout>
       <Header>
@@ -50,7 +52,8 @@ const Home = () => {
             transition={{ duration: 0.5, ease: 'easeInOut', delay: 0.5 }}
             style={{ textAlign: 'center', marginTop: '30px' }}
           >
-            <Button type="primary" size="large" style={{ padding: '10px 20px' }}>
+            <Button type="primary" size="large" style={{ padding: '10px 20px' }}
+             onClick={() => navigate('/app/create-ticket')}>
               Get Started
             </Button>
           </motion.div>
