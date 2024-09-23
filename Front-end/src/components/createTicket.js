@@ -16,7 +16,7 @@ export default function CreateTicket() {
     e.preventDefault();
     try {
       const token = localStorage.getItem('token');
-      const response = await axios.post('http://localhost:4000/ticket/create', ticketData, {
+      const response = await axios.post('https://ticketsystem-backend-cbpv.onrender.com/ticket/create', ticketData, {
         headers: {
           'Authorization': `Bearer ${token}` 
         }
