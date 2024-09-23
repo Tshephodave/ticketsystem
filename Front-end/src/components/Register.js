@@ -15,43 +15,18 @@ const Register = () => {
   useEffect(() => {
     (async () => {
       await loadAll(tsParticles);
-
       await tsParticles.addPreset("lightdark", {
-        fullScreen: {
-          enable: false
-        },
+        fullScreen: { enable: false },
         particles: {
-          links: {
-            enable: true
-          },
-          move: {
-            enable: true
-          },
-          number: {
-            value: 50
-          },
-          opacity: {
-            value: { min: 0.3, max: 1 }
-          },
+          links: { enable: true },
+          move: { enable: true },
+          number: { value: 50 },
+          opacity: { value: { min: 0.3, max: 1 } },
           shape: {
             type: ["circle", "square", "triangle", "polygon"],
-            options: {
-              polygon: [
-                {
-                  sides: 5
-                },
-                {
-                  sides: 6
-                },
-                {
-                  sides: 8
-                }
-              ]
-            }
+            options: { polygon: [{ sides: 5 }, { sides: 6 }, { sides: 8 }] }
           },
-          size: {
-            value: { min: 1, max: 3 }
-          }
+          size: { value: { min: 1, max: 3 } }
         }
       });
 
@@ -60,12 +35,8 @@ const Register = () => {
         options: {
           preset: "lightdark",
           particles: {
-            color: {
-              value: "#191970"
-            },
-            links: {
-              color: "#191970"
-            }
+            color: { value: "#191970" },
+            links: { color: "#191970" }
           }
         }
       });
@@ -73,61 +44,57 @@ const Register = () => {
   }, []);
 
   const [formData, setFormData] = useState({
-    name: '',
-    surname: '',
-    phone: '',
-    email: '',
-    department: 'finance',
-    location: '',
-    role: 'user',
-    password: '',
-    passwordConfirm: ''
+    name: '', surname: '', phone: '', email: '', department: 'finance', location: '', role: 'user', password: '', passwordConfirm: ''
   });
 
   const [errors, setErrors] = useState({
-    email: '',
-    phone: ''
+    email: '', phone: '', passwordMatch: '', passwordStrength: ''
   });
 
-  const validateEmail = (email) => {
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const validatePhone = (phone) => /\d{3}-\d{3}-\d{4}/.test(phone);
 
-  const validatePhone = (phone) => {
-    const regex = /\d{3}-\d{3}-\d{4}/;
-    return regex.test(phone);
+  const validatePasswordStrength = (password) => {
+    const strongPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+    return strongPassword.test(password);
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     if (name === 'email') {
-      setErrors({
-        ...errors,
-        email: validateEmail(value) ? '' : 'Invalid email format - must be in this format usr@gmail.com'
-      });
+      setErrors({ ...errors, email: validateEmail(value) ? '' : 'Invalid email format' });
     }
 
     if (name === 'phone') {
-      setErrors({
-        ...errors,
-        phone: validatePhone(value) ? '' : 'Invalid phone format - must be in this format 071-343-0009'
-      });
+      setErrors({ ...errors, phone: validatePhone(value) ? '' : 'Invalid phone format' });
     }
 
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    if (name === 'password') {
+      setErrors({ ...errors, passwordStrength: validatePasswordStrength(value) ? '' : 'Password must be at least 8 characters long, with uppercase, lowercase, and a number' });
+    }
+
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (errors.email || errors.phone) {
+
+    if (formData.password !== formData.passwordConfirm) {
+      setErrors({ ...errors, passwordMatch: 'Passwords do not match!' });
+      return;
+    }
+
+    if (!validatePasswordStrength(formData.password)) {
+      setErrors({ ...errors, passwordStrength: 'Password does not meet strength requirements' });
+      return;
+    }
+
+    if (errors.email || errors.phone || errors.passwordMatch || errors.passwordStrength) {
       alert('Please fix the errors in the form');
       return;
     }
+
     try {
       const response = await axios.post('https://ticketsystem-backend-cbpv.onrender.com/user/register', formData);
       alert(response.data.message);
@@ -139,14 +106,11 @@ const Register = () => {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-r from-green-100 to-indigo-100 flex items-center justify-center p-8">
-      {/* Particles Background */}
       <div id="particles-background" className="absolute inset-0 z-0"></div>
-
-      {/* Registration Form */}
       <div className="relative z-10 bg-white p-8 rounded-lg shadow-md w-full max-w-md">
         <h2 className="text-3xl font-bold mb-6 text-center text-green-600">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
+        <div>
             <div className="flex items-center space-x-2">
               <FontAwesomeIcon icon="user" className="text-gray-500" />
               <label className="block text-gray-700">Name</label>
@@ -264,6 +228,7 @@ const Register = () => {
               className="w-full p-3 border border-gray-300 rounded mt-1"
               required
             />
+            {errors.passwordStrength && <p className="text-red-500 text-sm mt-1">{errors.passwordStrength}</p>}
           </div>
           <div>
             <div className="flex items-center space-x-2">
@@ -278,22 +243,11 @@ const Register = () => {
               className="w-full p-3 border border-gray-300 rounded mt-1"
               required
             />
+            {errors.passwordMatch && <p className="text-red-500 text-sm mt-1">{errors.passwordMatch}</p>}
           </div>
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white p-3 rounded mt-4 hover:bg-green-700"
-          >
+          <button type="submit" className="w-full bg-green-600 text-white p-3 rounded mt-4 hover:bg-green-700">
             Register
           </button>
-          <p className="mt-4 text-center text-sm text-gray-600">
-            Already have an Account{' '}
-            <button
-              onClick={() => navigate('/login')}
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Login
-            </button>
-          </p>
         </form>
       </div>
     </div>
