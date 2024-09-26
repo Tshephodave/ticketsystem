@@ -248,6 +248,15 @@ const Register = () => {
           <button type="submit" className="w-full bg-green-600 text-white p-3 rounded mt-4 hover:bg-green-700">
             Register
           </button>
+                 <p className="mt-4 text-center text-sm text-gray-600">
+            Already have an Account{' '}
+            <button
+              onClick={() => navigate('/login')}
+              className="font-medium text-indigo-600 hover:text-indigo-500"
+            >
+              Login
+            </button>
+          </p>
         </form>
       </div>
     </div>
