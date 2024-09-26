@@ -63,11 +63,11 @@ const Register = () => {
     const { name, value } = e.target;
 
     if (name === 'email') {
-      setErrors({ ...errors, email: validateEmail(value) ? '' : 'Invalid email format' });
+      setErrors({ ...errors, email: validateEmail(value) ? '' : 'Invalid email format - must be in this format usr@gmail.com' });
     }
 
     if (name === 'phone') {
-      setErrors({ ...errors, phone: validatePhone(value) ? '' : 'Invalid phone format' });
+      setErrors({ ...errors, phone: validatePhone(value) ? '' : 'Invalid phone format - must be in this format 071-343-0009' });
     }
 
     if (name === 'password') {
